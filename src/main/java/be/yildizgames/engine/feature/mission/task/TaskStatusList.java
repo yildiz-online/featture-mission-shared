@@ -23,9 +23,9 @@
 
 package be.yildizgames.engine.feature.mission.task;
 
-import be.yildiz.common.collections.Lists;
 import be.yildizgames.common.mapping.ListWrapper;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -45,7 +45,7 @@ public class TaskStatusList implements ListWrapper <TaskStatus>{
 
     @Override
     public List<TaskStatus> getList() {
-        return Lists.newList(this.list);
+        return new ArrayList<>(this.list);
     }
 
     @Override

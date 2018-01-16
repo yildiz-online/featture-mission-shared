@@ -25,12 +25,11 @@
 package be.yildizgames.engine.feature.mission;
 
 import be.yildiz.common.PlayerCreationListener;
-import be.yildiz.common.collections.CollectionUtil;
-import be.yildiz.common.collections.Lists;
-import be.yildiz.common.collections.Maps;
-import be.yildiz.common.collections.Sets;
-import be.yildiz.common.exeption.UnhandledSwitchCaseException;
-import be.yildiz.common.id.PlayerId;
+import be.yildizgames.common.collection.CollectionUtil;
+import be.yildizgames.common.collection.Lists;
+import be.yildizgames.common.collection.Maps;
+import be.yildizgames.common.collection.Sets;
+import be.yildizgames.common.model.PlayerId;
 import be.yildizgames.engine.feature.mission.reward.RewardManager;
 import be.yildizgames.engine.feature.mission.task.TaskFactory;
 import be.yildizgames.engine.feature.mission.task.TaskId;
@@ -108,7 +107,7 @@ public class MissionManager <T extends Mission> implements TaskStatusListener, P
                 mission.getTasks().forEach(t -> this.taskFactory.createTask(t, pms.player, pms.id));
                 break;
             default:
-                throw new UnhandledSwitchCaseException(pms.status);
+                throw new IllegalArgumentException(pms.status + " is not a valid option.");
         }
     }
 
