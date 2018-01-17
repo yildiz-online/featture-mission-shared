@@ -24,8 +24,8 @@
 
 package be.yildizgames.engine.feature.mission;
 
-import be.yildiz.common.collections.Lists;
-import be.yildiz.common.id.PlayerId;
+import be.yildizgames.common.collection.Lists;
+import be.yildizgames.common.model.PlayerId;
 import be.yildizgames.engine.feature.mission.reward.Reward;
 import be.yildizgames.engine.feature.mission.reward.RewardFactory;
 import be.yildizgames.engine.feature.mission.reward.RewardId;

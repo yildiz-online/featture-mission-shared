@@ -24,7 +24,7 @@
 
 package be.yildizgames.engine.feature.mission.task;
 
-import be.yildiz.common.id.PlayerId;
+import be.yildizgames.common.model.PlayerId;
 import be.yildizgames.engine.feature.mission.MissionId;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;

@@ -24,7 +24,8 @@
 
 package be.yildizgames.engine.feature.mission.reward;
 
-import be.yildiz.common.ValueObject;
+
+import be.yildizgames.common.util.ValueObject;
 
 /**
  * @author Grégory Van den Borre

@@ -24,11 +24,11 @@
 
 package be.yildizgames.engine.feature.mission;
 
-import be.yildiz.common.PlayerCreationListener;
 import be.yildizgames.common.collection.CollectionUtil;
 import be.yildizgames.common.collection.Lists;
 import be.yildizgames.common.collection.Maps;
 import be.yildizgames.common.collection.Sets;
+import be.yildizgames.common.model.PlayerCreationListener;
 import be.yildizgames.common.model.PlayerId;
 import be.yildizgames.engine.feature.mission.reward.RewardManager;
 import be.yildizgames.engine.feature.mission.task.TaskFactory;
