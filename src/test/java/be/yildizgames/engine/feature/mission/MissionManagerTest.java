@@ -1,7 +1,7 @@
 /*
  * This file is part of the Yildiz-Engine project, licenced under the MIT License  (MIT)
  *
- *  Copyright (c) 2017 Grégory Van den Borre
+ *  Copyright (c) 2018 Grégory Van den Borre
  *
  *  More infos available: https://www.yildiz-games.be
  *
@@ -24,17 +24,21 @@
 
 package be.yildizgames.engine.feature.mission;
 
-import be.yildizgames.common.collection.Lists;
 import be.yildizgames.common.model.PlayerId;
 import be.yildizgames.engine.feature.mission.reward.Reward;
 import be.yildizgames.engine.feature.mission.reward.RewardFactory;
 import be.yildizgames.engine.feature.mission.reward.RewardId;
 import be.yildizgames.engine.feature.mission.reward.RewardManager;
-import be.yildizgames.engine.feature.mission.task.*;
+import be.yildizgames.engine.feature.mission.task.Task;
+import be.yildizgames.engine.feature.mission.task.TaskFactory;
+import be.yildizgames.engine.feature.mission.task.TaskId;
+import be.yildizgames.engine.feature.mission.task.TaskStatus;
+import be.yildizgames.engine.feature.mission.task.TaskStatusListener;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -113,7 +117,7 @@ class MissionManagerTest {
                 return player -> {};
             }
         }));
-        mm.registerMission(new BaseMission(MissionId.valueOf(1), Lists.newList(TaskId.valueOf(1)), p -> true, RewardId.valueOf(1)));
+        mm.registerMission(new BaseMission(MissionId.valueOf(1), List.of(TaskId.valueOf(1)), p -> true, RewardId.valueOf(1)));
         return mm;
     }
 

@@ -1,7 +1,7 @@
 /*
  * This file is part of the Yildiz-Engine project, licenced under the MIT License  (MIT)
  *
- *  Copyright (c) 2017 Grégory Van den Borre
+ *  Copyright (c) 2018 Grégory Van den Borre
  *
  *  More infos available: https://www.yildiz-games.be
  *
@@ -24,12 +24,13 @@
 
 package be.yildizgames.engine.feature.mission.protocol.mapper;
 
-import be.yildizgames.common.collection.Lists;
 import be.yildizgames.common.mapping.BaseMapperTest;
 import be.yildizgames.engine.feature.mission.MissionId;
 import be.yildizgames.engine.feature.mission.task.TaskId;
 import be.yildizgames.engine.feature.mission.task.TaskStatus;
 import be.yildizgames.engine.feature.mission.task.TaskStatusList;
+
+import java.util.List;
 
 /**
  * @author Grégory Van den Borre
@@ -38,7 +39,7 @@ public class TaskStatusListMapperTest extends BaseMapperTest<TaskStatusList> {
 
     public TaskStatusListMapperTest() {
         super(TaskStatusListMapper.getInstance(), new TaskStatusList(
-                Lists.newList(
+                List.of(
                         new TaskStatus(TaskId.valueOf(1), MissionId.valueOf(2), "ok"),
                         new TaskStatus(TaskId.valueOf(2), MissionId.valueOf(3), ""),
                         new TaskStatus(TaskId.valueOf(2), MissionId.valueOf(3), "ok2")
