@@ -64,14 +64,6 @@ class MissionTest {
         }
 
         @Test
-        void willListContainsNull() {
-            List<TaskId> l = new ArrayList<>();
-            l.add(TaskId.valueOf(5L));
-            l.add(null);
-            Assertions.assertThrows(IllegalArgumentException.class, () -> new BaseMission(id, l, p -> true, RewardId.valueOf(1)));
-        }
-
-        @Test
         void withNullPrerequisite() {
             List<TaskId> l = Collections.singletonList(TaskId.valueOf(5L));
             Assertions.assertThrows(AssertionError.class, () -> new BaseMission(id, l, null, RewardId.valueOf(1)));

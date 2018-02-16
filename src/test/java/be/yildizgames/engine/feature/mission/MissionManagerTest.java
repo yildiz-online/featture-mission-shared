@@ -117,7 +117,8 @@ class MissionManagerTest {
                 return player -> {};
             }
         }));
-        mm.registerMission(new BaseMission(MissionId.valueOf(1), List.of(TaskId.valueOf(1)), p -> true, RewardId.valueOf(1)));
+        BaseMission bm = new BaseMission(MissionId.valueOf(1), List.of(TaskId.valueOf(1)), p -> true, RewardId.valueOf(1));
+        mm.registerMission(bm);
         return mm;
     }
 

@@ -67,9 +67,6 @@ public class BaseMission implements Mission {
         assert tasks != null;
         assert p != null;
         this.id = id;
-        if(tasks.contains(null)) {
-            throw new IllegalArgumentException("Task list cannot contains null values.");
-        }
         if(tasks.isEmpty()) {
             throw new IllegalArgumentException("Task list cannot be empty.");
         }
