@@ -24,10 +24,10 @@
 
 package be.yildizgames.engine.feature.mission.task;
 
-import be.yildizgames.common.collection.Lists;
 import be.yildizgames.common.model.PlayerId;
 import be.yildizgames.engine.feature.mission.MissionId;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -42,7 +42,7 @@ public class BaseTask implements Task {
 
     private final TaskId id;
 
-    private final List<TaskStatusListener> listeners = Lists.newList();
+    private final List<TaskStatusListener> listeners = new ArrayList<>();
     private final PlayerId player;
     private final MissionId missionId;
 

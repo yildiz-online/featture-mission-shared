@@ -24,10 +24,7 @@
 
 package be.yildizgames.engine.feature.mission;
 
-import be.yildizgames.common.collection.CollectionUtil;
-import be.yildizgames.common.collection.Lists;
-import be.yildizgames.common.collection.Maps;
-import be.yildizgames.common.collection.Sets;
+import be.yildizgames.common.logging.LogFactory;
 import be.yildizgames.common.model.PlayerCreationListener;
 import be.yildizgames.common.model.PlayerId;
 import be.yildizgames.engine.feature.mission.reward.RewardManager;
@@ -36,8 +33,10 @@ import be.yildizgames.engine.feature.mission.task.TaskId;
 import be.yildizgames.engine.feature.mission.task.TaskStatus;
 import be.yildizgames.engine.feature.mission.task.TaskStatusListener;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -49,20 +48,20 @@ import java.util.stream.Collectors;
  */
 public class MissionManager <T extends Mission> implements TaskStatusListener, PlayerCreationListener {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(MissionManager.class);
+    private static final Logger LOGGER = LogFactory.getInstance().getLogger(MissionManager.class);
 
     /**
      * The list of all possible missions.
      */
-    private final Map<MissionId, T> availableMissions = Maps.newMap();
+    private final Map<MissionId, T> availableMissions = new HashMap<>();
 
-    private final Map<PlayerId, Set<MissionId>> missionsReady = Maps.newMap();
+    private final Map<PlayerId, Set<MissionId>> missionsReady = new HashMap<>();
 
-    private final Map<PlayerId, Set<MissionId>> activeMissions = Maps.newMap();
+    private final Map<PlayerId, Set<MissionId>> activeMissions = new HashMap<>();
 
-    private final List<MissionStatusListener<T>> listeners = Lists.newList();
+    private final List<MissionStatusListener<T>> listeners = new ArrayList<>();
 
-    private final Map<PlayerId, Set<TaskStatus>> taskStatus = Maps.newMap();
+    private final Map<PlayerId, Set<TaskStatus>> taskStatus = new HashMap<>();
 
     /**
      * Factory to build the tasks required by the missions.
@@ -83,7 +82,7 @@ public class MissionManager <T extends Mission> implements TaskStatusListener, P
     }
 
     public final void prepareMission(final MissionId missionId, final PlayerId playerId) {
-        CollectionUtil.getOrCreateSetFromMap(this.missionsReady, playerId).add(missionId);
+        this.missionsReady.computeIfAbsent(playerId, (PlayerId) -> new HashSet<>()).add(missionId);
         T mission = this.availableMissions.get(missionId);
         mission.getTasks().forEach(t -> this.taskFactory.createTask(t, playerId, mission.getId()));
         this.listeners.forEach(l->l.missionReady(mission, playerId));
@@ -91,7 +90,7 @@ public class MissionManager <T extends Mission> implements TaskStatusListener, P
 
     public final void startMission(final MissionId missionId, final PlayerId playerId) {
         this.missionsReady.get(playerId).remove(missionId);
-        CollectionUtil.getOrCreateSetFromMap(this.activeMissions, playerId).add(missionId);
+        this.activeMissions.computeIfAbsent(playerId, (PlayerId) -> new HashSet<>()).add(missionId);
         T mission = this.availableMissions.get(missionId);
         this.listeners.forEach(l->l.missionStarted(mission, playerId));
     }
@@ -99,10 +98,10 @@ public class MissionManager <T extends Mission> implements TaskStatusListener, P
     public final void initialize(final PlayerMissionStatus pms) {
         switch (pms.status) {
             case STARTED:
-                CollectionUtil.getOrCreateSetFromMap(this.activeMissions, pms.player).add(pms.id);
+                this.activeMissions.computeIfAbsent(pms.player, (PlayerId) -> new HashSet<>()).add(pms.id);
                 break;
             case WAITING_FOR_ACCEPTANCE:
-                CollectionUtil.getOrCreateSetFromMap(this.missionsReady, pms.player).add(pms.id);
+                this.missionsReady.computeIfAbsent(pms.player, (PlayerId) -> new HashSet<>()).add(pms.id);
                 T mission = this.availableMissions.get(pms.id);
                 mission.getTasks().forEach(t -> this.taskFactory.createTask(t, pms.player, pms.id));
                 break;
@@ -114,7 +113,7 @@ public class MissionManager <T extends Mission> implements TaskStatusListener, P
     @Override
     public final void taskCompleted(final TaskId taskId, MissionId missionId, final PlayerId playerId) {
         TaskStatus status = new TaskStatus(taskId, missionId, "SUCCESS");
-        Set<TaskStatus> statusSet = CollectionUtil.getOrCreateSetFromMap(this.taskStatus, playerId);
+        Set<TaskStatus> statusSet = this.taskStatus.computeIfAbsent(playerId, (playerId1) -> new HashSet<>());
         statusSet.remove(status);
         statusSet.add(status);
         boolean success = this.checkMissionCompleted(missionId, playerId);
@@ -129,7 +128,7 @@ public class MissionManager <T extends Mission> implements TaskStatusListener, P
     @Override
     public final void taskFailed(TaskId taskId, MissionId missionId, PlayerId playerId) {
         TaskStatus status = new TaskStatus(taskId, missionId, "FAILED");
-        Set<TaskStatus> statusSet = CollectionUtil.getOrCreateSetFromMap(this.taskStatus, playerId);
+        Set<TaskStatus> statusSet = this.taskStatus.computeIfAbsent(playerId, (playerId1) -> new HashSet<>());
         statusSet.remove(status);
         statusSet.add(status);
         T mission = this.availableMissions.get(missionId);
@@ -147,7 +146,8 @@ public class MissionManager <T extends Mission> implements TaskStatusListener, P
         } else if(status.equalsIgnoreCase("FAILED")) {
             this.taskFailed(taskId, missionId, playerId);
         } else {
-            CollectionUtil.getOrCreateSetFromMap(this.taskStatus, playerId).add(new TaskStatus(taskId, missionId, status));
+            this.taskStatus.computeIfAbsent(playerId, (playerId1) -> new HashSet<>())
+                    .add(new TaskStatus(taskId, missionId, status));
         }
     }
 
@@ -168,11 +168,11 @@ public class MissionManager <T extends Mission> implements TaskStatusListener, P
     }
 
     public final Set<MissionId> getMissionReady(PlayerId p) {
-        return this.missionsReady.getOrDefault(p, Sets.newSet());
+        return this.missionsReady.getOrDefault(p, new HashSet<>());
     }
 
     public final Set<MissionId> getMissionActive(PlayerId p) {
-        return this.activeMissions.getOrDefault(p, Sets.newSet());
+        return this.activeMissions.getOrDefault(p, new HashSet<>());
     }
 
     public final Set<TaskStatus> getTaskStatus(PlayerId p) {
@@ -187,7 +187,7 @@ public class MissionManager <T extends Mission> implements TaskStatusListener, P
     private boolean checkMissionCompleted(final MissionId missionId, final PlayerId playerId) {
         T m = this.availableMissions.get(missionId);
         for(TaskId tid : m.getTasks()) {
-            TaskStatus task = CollectionUtil.getOrCreateSetFromMap(this.taskStatus, playerId)
+            TaskStatus task = this.taskStatus.computeIfAbsent(playerId, (PlayerId) -> new HashSet<>())
                     .stream()
                     .filter(t -> t.id.equals(tid))
                     .findFirst().orElseThrow(AssertionError::new);

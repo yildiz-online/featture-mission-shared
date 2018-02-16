@@ -22,13 +22,17 @@
  *
  */
 
-package be.yildizgames.engine.feature.mission;
+module be.yildizgames.feature.mission.shared {
+    requires be.yildizgames.common.model;
+    requires be.yildizgames.common.logging;
+    requires be.yildizgames.common.util;
+    requires be.yildizgames.common.mapping;
 
-/**
- * A reward is received by a player once a mission is completed.
- * The reward will certainly differ if the mission is successful or failed.
- * The reward can only be received once.
- * @author Grégory Van den Borre
- */
-public class Reward {
+    requires slf4j.api;
+
+    exports be.yildizgames.engine.feature.mission;
+    exports be.yildizgames.engine.feature.mission.protocol;
+    exports be.yildizgames.engine.feature.mission.protocol.mapper;
+    exports be.yildizgames.engine.feature.mission.reward;
+    exports be.yildizgames.engine.feature.mission.task;
 }

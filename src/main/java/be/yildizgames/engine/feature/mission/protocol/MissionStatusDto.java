@@ -58,13 +58,7 @@ public class MissionStatusDto {
 
         MissionStatusDto that = (MissionStatusDto) o;
 
-        if (!missionId.equals(that.missionId)) {
-            return false;
-        }
-        if (status != that.status) {
-            return false;
-        }
-        return tasks.equals(that.tasks);
+        return missionId.equals(that.missionId) && status == that.status && tasks.equals(that.tasks);
     }
 
     @Override

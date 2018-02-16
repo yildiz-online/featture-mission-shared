@@ -24,7 +24,6 @@
 
 package be.yildizgames.engine.feature.mission.protocol.mapper;
 
-import be.yildizgames.common.mapping.BaseMapperTest;
 import be.yildizgames.engine.feature.mission.MissionId;
 import be.yildizgames.engine.feature.mission.task.TaskId;
 import be.yildizgames.engine.feature.mission.task.TaskStatus;

@@ -24,12 +24,12 @@
 
 package be.yildizgames.engine.feature.mission;
 
-import be.yildizgames.common.collection.Sets;
 import be.yildizgames.common.model.PlayerId;
 import be.yildizgames.engine.feature.mission.reward.RewardId;
 import be.yildizgames.engine.feature.mission.task.TaskId;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -43,7 +43,6 @@ import java.util.Set;
  * The player can also fail the mission, in this case he may or not be able to restart it.
  * Immutable object.
  * @author Grégory Van den Borre
- *
  *
  */
 public class BaseMission implements Mission {
@@ -74,7 +73,7 @@ public class BaseMission implements Mission {
         if(tasks.isEmpty()) {
             throw new IllegalArgumentException("Task list cannot be empty.");
         }
-        this.tasks = Collections.unmodifiableSet(Sets.newSet(tasks));
+        this.tasks = Collections.unmodifiableSet(new HashSet<>(tasks));
         this.prerequisite = p;
         this.reward = reward;
     }

@@ -24,13 +24,13 @@
 
 package be.yildizgames.engine.feature.mission.protocol.mapper;
 
-import be.yildizgames.common.collection.Lists;
-import be.yildizgames.common.mapping.BaseMapperTest;
 import be.yildizgames.engine.feature.mission.MissionId;
 import be.yildizgames.engine.feature.mission.MissionStatus;
 import be.yildizgames.engine.feature.mission.protocol.MissionStatusDto;
 import be.yildizgames.engine.feature.mission.task.TaskId;
 import be.yildizgames.engine.feature.mission.task.TaskStatus;
+
+import java.util.List;
 
 /**
  * @author Grégory Van den Borre
@@ -41,7 +41,7 @@ public class MissionStatusDtoMapperTest extends BaseMapperTest<MissionStatusDto>
         super(MissionStatusDtoMapper.getInstance(), new MissionStatusDto(
                 MissionId.valueOf(4),
                 MissionStatus.valueOf(1),
-                Lists.newList(
+                List.of(
                         new TaskStatus(TaskId.valueOf(7), MissionId.valueOf(7), "ok"),
                         new TaskStatus(TaskId.valueOf(8), MissionId.valueOf(7), "ok2"),
                         new TaskStatus(TaskId.valueOf(9), MissionId.valueOf(7), "ok3")

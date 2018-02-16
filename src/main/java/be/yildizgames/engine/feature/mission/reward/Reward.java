@@ -27,6 +27,9 @@ package be.yildizgames.engine.feature.mission.reward;
 import be.yildizgames.common.model.PlayerId;
 
 /**
+ * A reward is received by a player once a mission is completed.
+ * The reward will certainly differ if the mission is successful or failed.
+ * The reward can only be received once.
  * @author Grégory Van den Borre
  */
 public interface Reward {

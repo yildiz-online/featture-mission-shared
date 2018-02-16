@@ -24,10 +24,10 @@
 
 package be.yildizgames.engine.feature.mission.task;
 
-import be.yildizgames.common.collection.Lists;
 import be.yildizgames.common.model.PlayerId;
 import be.yildizgames.engine.feature.mission.MissionId;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,7 +35,7 @@ import java.util.List;
  */
 public abstract class TaskFactory <T extends Task> {
 
-    protected final List<TaskStatusListener> taskStatusListeners = Lists.newList();
+    protected final List<TaskStatusListener> taskStatusListeners = new ArrayList<>();
 
     public abstract  T createTask(TaskId id, PlayerId p, MissionId missionId);
 
