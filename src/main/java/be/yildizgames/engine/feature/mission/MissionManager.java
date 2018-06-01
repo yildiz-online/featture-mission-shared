@@ -82,7 +82,7 @@ public class MissionManager <T extends Mission> implements TaskStatusListener, P
     }
 
     public final void prepareMission(final MissionId missionId, final PlayerId playerId) {
-        this.missionsReady.computeIfAbsent(playerId, (PlayerId) -> new HashSet<>()).add(missionId);
+        this.missionsReady.computeIfAbsent(playerId, PlayerId -> new HashSet<>()).add(missionId);
         T mission = this.availableMissions.get(missionId);
         mission.getTasks().forEach(t -> this.taskFactory.createTask(t, playerId, mission.getId()));
         this.listeners.forEach(l->l.missionReady(mission, playerId));
@@ -90,7 +90,7 @@ public class MissionManager <T extends Mission> implements TaskStatusListener, P
 
     public final void startMission(final MissionId missionId, final PlayerId playerId) {
         this.missionsReady.get(playerId).remove(missionId);
-        this.activeMissions.computeIfAbsent(playerId, (PlayerId) -> new HashSet<>()).add(missionId);
+        this.activeMissions.computeIfAbsent(playerId, PlayerId -> new HashSet<>()).add(missionId);
         T mission = this.availableMissions.get(missionId);
         this.listeners.forEach(l->l.missionStarted(mission, playerId));
     }
@@ -98,10 +98,10 @@ public class MissionManager <T extends Mission> implements TaskStatusListener, P
     public final void initialize(final PlayerMissionStatus pms) {
         switch (pms.status) {
             case STARTED:
-                this.activeMissions.computeIfAbsent(pms.player, (PlayerId) -> new HashSet<>()).add(pms.id);
+                this.activeMissions.computeIfAbsent(pms.player, PlayerId -> new HashSet<>()).add(pms.id);
                 break;
             case WAITING_FOR_ACCEPTANCE:
-                this.missionsReady.computeIfAbsent(pms.player, (PlayerId) -> new HashSet<>()).add(pms.id);
+                this.missionsReady.computeIfAbsent(pms.player, PlayerId -> new HashSet<>()).add(pms.id);
                 T mission = this.availableMissions.get(pms.id);
                 mission.getTasks().forEach(t -> this.taskFactory.createTask(t, pms.player, pms.id));
                 break;
@@ -113,7 +113,7 @@ public class MissionManager <T extends Mission> implements TaskStatusListener, P
     @Override
     public final void taskCompleted(final TaskId taskId, MissionId missionId, final PlayerId playerId) {
         TaskStatus status = new TaskStatus(taskId, missionId, "SUCCESS");
-        Set<TaskStatus> statusSet = this.taskStatus.computeIfAbsent(playerId, (playerId1) -> new HashSet<>());
+        Set<TaskStatus> statusSet = this.taskStatus.computeIfAbsent(playerId, playerId1 -> new HashSet<>());
         statusSet.remove(status);
         statusSet.add(status);
         boolean success = this.checkMissionCompleted(missionId, playerId);
@@ -128,7 +128,7 @@ public class MissionManager <T extends Mission> implements TaskStatusListener, P
     @Override
     public final void taskFailed(TaskId taskId, MissionId missionId, PlayerId playerId) {
         TaskStatus status = new TaskStatus(taskId, missionId, "FAILED");
-        Set<TaskStatus> statusSet = this.taskStatus.computeIfAbsent(playerId, (playerId1) -> new HashSet<>());
+        Set<TaskStatus> statusSet = this.taskStatus.computeIfAbsent(playerId, playerId1 -> new HashSet<>());
         statusSet.remove(status);
         statusSet.add(status);
         T mission = this.availableMissions.get(missionId);
@@ -136,7 +136,7 @@ public class MissionManager <T extends Mission> implements TaskStatusListener, P
             this.activeMissions.get(playerId).remove(mission.getId());
             this.listeners.forEach(l -> l.missionFailed(mission, playerId));
         } else {
-            LOGGER.warn(taskId + " does not exists for mission " + missionId + "task failed for player:" + playerId);
+            LOGGER.warn("{} does not exists for mission {} task failed for player: {}",taskId, missionId, playerId);
         }
     }
 
@@ -146,7 +146,7 @@ public class MissionManager <T extends Mission> implements TaskStatusListener, P
         } else if(status.equalsIgnoreCase("FAILED")) {
             this.taskFailed(taskId, missionId, playerId);
         } else {
-            this.taskStatus.computeIfAbsent(playerId, (playerId1) -> new HashSet<>())
+            this.taskStatus.computeIfAbsent(playerId, playerId1 -> new HashSet<>())
                     .add(new TaskStatus(taskId, missionId, status));
         }
     }
@@ -187,7 +187,7 @@ public class MissionManager <T extends Mission> implements TaskStatusListener, P
     private boolean checkMissionCompleted(final MissionId missionId, final PlayerId playerId) {
         T m = this.availableMissions.get(missionId);
         for(TaskId tid : m.getTasks()) {
-            TaskStatus task = this.taskStatus.computeIfAbsent(playerId, (PlayerId) -> new HashSet<>())
+            TaskStatus task = this.taskStatus.computeIfAbsent(playerId, PlayerId -> new HashSet<>())
                     .stream()
                     .filter(t -> t.id.equals(tid))
                     .findFirst().orElseThrow(AssertionError::new);
