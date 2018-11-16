@@ -24,7 +24,6 @@
 
 package be.yildizgames.engine.feature.mission.protocol.mapper;
 
-import be.yildizgames.common.mapping.MappingException;
 import be.yildizgames.common.mapping.ObjectMapper;
 import be.yildizgames.engine.feature.mission.MissionId;
 

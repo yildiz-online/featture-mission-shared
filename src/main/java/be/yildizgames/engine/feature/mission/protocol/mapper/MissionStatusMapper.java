@@ -24,7 +24,6 @@
 
 package be.yildizgames.engine.feature.mission.protocol.mapper;
 
-import be.yildizgames.common.mapping.MappingException;
 import be.yildizgames.common.mapping.ObjectMapper;
 import be.yildizgames.engine.feature.mission.MissionStatus;
 
@@ -44,7 +43,7 @@ public class MissionStatusMapper implements ObjectMapper<MissionStatus> {
     }
 
     @Override
-    public MissionStatus from(String s) throws MappingException {
+    public MissionStatus from(String s) {
         assert s != null;
         try {
             return MissionStatus.valueOf(Integer.parseInt(s));

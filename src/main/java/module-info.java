@@ -27,6 +27,7 @@ module be.yildizgames.feature.mission.shared {
     requires be.yildizgames.common.logging;
     requires be.yildizgames.common.util;
     requires be.yildizgames.common.mapping;
+    requires be.yildizgames.common.exception;
 
     requires slf4j.api;
 

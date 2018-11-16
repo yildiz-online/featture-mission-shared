@@ -25,7 +25,6 @@
 package be.yildizgames.engine.feature.mission.protocol.mapper;
 
 import be.yildizgames.common.mapping.CollectionMapper;
-import be.yildizgames.common.mapping.MappingException;
 import be.yildizgames.common.mapping.ObjectMapper;
 import be.yildizgames.common.mapping.Separator;
 import be.yildizgames.engine.feature.mission.protocol.MissionStatusDto;
