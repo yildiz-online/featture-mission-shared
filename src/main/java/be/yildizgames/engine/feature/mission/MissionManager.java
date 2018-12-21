@@ -24,7 +24,6 @@
 
 package be.yildizgames.engine.feature.mission;
 
-import be.yildizgames.common.logging.LogFactory;
 import be.yildizgames.common.model.PlayerCreationListener;
 import be.yildizgames.common.model.PlayerId;
 import be.yildizgames.engine.feature.mission.reward.RewardManager;
@@ -33,6 +32,7 @@ import be.yildizgames.engine.feature.mission.task.TaskId;
 import be.yildizgames.engine.feature.mission.task.TaskStatus;
 import be.yildizgames.engine.feature.mission.task.TaskStatusListener;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -48,7 +48,7 @@ import java.util.stream.Collectors;
  */
 public class MissionManager <T extends Mission> implements TaskStatusListener, PlayerCreationListener {
 
-    private static final Logger LOGGER = LogFactory.getInstance().getLogger(MissionManager.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MissionManager.class);
 
     /**
      * The list of all possible missions.
