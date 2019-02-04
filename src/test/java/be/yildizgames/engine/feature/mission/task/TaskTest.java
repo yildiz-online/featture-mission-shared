@@ -36,33 +36,33 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * @author Grégory Van den Borre
  */
-class TaskTest {
+public class TaskTest {
 
     @Nested
     class Constructor {
 
         @Test
-        void happyFlow() {
+        public void happyFlow() {
             new BaseTask(TaskId.valueOf(1), MissionId.valueOf(1), PlayerId.valueOf(5));
         }
 
         @Test
-        void withNull() {
+        public void withNull() {
             assertThrows(AssertionError.class, () -> new BaseTask(null, MissionId.valueOf(1),PlayerId.WORLD));
         }
     }
 
     @Nested
-    class IsCompleted {
+    public class IsCompleted {
 
         @Test
-        void initialStatus() {
+        public void initialStatus() {
             Task t = new BaseTask(TaskId.valueOf(1), MissionId.valueOf(1), PlayerId.valueOf(5));
             assertFalse(t.isCompleted());
         }
 
         @Test
-        void setCompleted() {
+        public void setCompleted() {
             BaseTask t = new BaseTask(TaskId.valueOf(1), MissionId.valueOf(1),PlayerId.valueOf(5));
             t.setCompleted();
             assertTrue(t.isCompleted());
