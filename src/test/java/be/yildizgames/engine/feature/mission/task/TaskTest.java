@@ -39,7 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class TaskTest {
 
     @Nested
-    class Constructor {
+    public class Constructor {
 
         @Test
         public void happyFlow() {
