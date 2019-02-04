@@ -41,7 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * @author Grégory Van den Borre
  */
-class MissionTest {
+public class MissionTest {
 
     static Mission givenANewMission() {
         List<TaskId> l = Collections.singletonList(TaskId.valueOf(5L));
@@ -49,28 +49,28 @@ class MissionTest {
     }
 
     @Nested
-    class Constructor {
+    public class Constructor {
 
         private final MissionId id = MissionId.valueOf(2);
 
         @Test
-        void happyFlow() {
+        public void happyFlow() {
             givenANewMission();
         }
 
         @Test
-        void withNullList() {
+        public void withNullList() {
             Assertions.assertThrows(AssertionError.class, () -> new BaseMission(id, null, p -> true, RewardId.valueOf(1)));
         }
 
         @Test
-        void withNullPrerequisite() {
+        public void withNullPrerequisite() {
             List<TaskId> l = Collections.singletonList(TaskId.valueOf(5L));
             Assertions.assertThrows(AssertionError.class, () -> new BaseMission(id, l, null, RewardId.valueOf(1)));
         }
 
         @Test
-        void withEmptyTaskList() {
+        public void withEmptyTaskList() {
             List<TaskId> l = new ArrayList<>();
             Assertions.assertThrows(IllegalArgumentException.class, () -> new BaseMission(id, l, p -> true, RewardId.valueOf(1)));
         }
@@ -78,12 +78,12 @@ class MissionTest {
     }
 
     @Nested
-    class CanStart {
+    public class CanStart {
 
         private final MissionId id = MissionId.valueOf(2);
 
         @Test
-        void withTruePrerequisite() {
+        public void withTruePrerequisite() {
             List<TaskId> l = new ArrayList<>();
             l.add(TaskId.valueOf(5L));
             Mission m = new BaseMission(id, l, p -> true, RewardId.valueOf(1));
@@ -91,7 +91,7 @@ class MissionTest {
         }
 
         @Test
-        void withFalsePrerequisite() {
+        public void withFalsePrerequisite() {
             List<TaskId> l = new ArrayList<>();
             l.add(TaskId.valueOf(5L));
             Mission m = new BaseMission(id, l, p -> false, RewardId.valueOf(1));
