@@ -33,16 +33,16 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 /**
  * @author Grégory Van den Borre
  */
-class TaskTypeTest {
+public class TaskTypeTest {
 
     /**
      * Different values can have same hc, so not tested.
      */
     @Nested
-    class Hashcode {
+    public class Hashcode {
 
         @Test
-        void sameValues() {
+        public void sameValues() {
             int i1 = new TaskType("ok").hashCode();
             int i2 = new TaskType("ok").hashCode();
             assertEquals(i1, i2);
@@ -50,25 +50,25 @@ class TaskTypeTest {
     }
 
     @Nested
-    class Equals {
+    public class Equals {
 
         @Test
-        void sameValues() {
+        public void sameValues() {
             assertEquals(new TaskType("ok"), new TaskType("ok"));
         }
 
         @Test
-        void differentValue() {
+        public void differentValue() {
             assertNotEquals(new TaskType("ok"), new TaskType("nok"));
         }
 
         @Test
-        void nullValue() {
+        public void nullValue() {
             assertNotEquals(new TaskType("ok"), null);
         }
 
         @Test
-        void differentClass() {
+        public void differentClass() {
             assertNotEquals(new TaskType("ok"), "ok");
         }
 
