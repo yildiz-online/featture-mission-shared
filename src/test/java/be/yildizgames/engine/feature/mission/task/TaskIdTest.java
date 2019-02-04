@@ -33,18 +33,18 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 /**
  * @author Grégory Van den Borre
  */
-class TaskIdTest {
+public class TaskIdTest {
 
     @Nested
-    class Constructor {
+    public class Constructor {
 
         @Test
-        void happyFlow() {
+        public void happyFlow() {
             TaskId.valueOf(1);
         }
 
         @Test
-        void withNegativeValue() {
+        public void withNegativeValue() {
             TaskId.valueOf(-1);
         }
 
@@ -54,10 +54,10 @@ class TaskIdTest {
      * Different values can have same hc, so not tested.
      */
     @Nested
-    class Hashcode {
+    public class Hashcode {
 
         @Test
-        void sameValues() {
+        public void sameValues() {
             int i1 = TaskId.valueOf(1).hashCode();
             int i2 = TaskId.valueOf(1).hashCode();
             assertEquals(i1, i2);
@@ -65,29 +65,29 @@ class TaskIdTest {
     }
 
     @Nested
-    class Equals {
+    public class Equals {
 
         @Test
-        void sameValues() {
+        public void sameValues() {
             TaskId i1 = TaskId.valueOf(1);
             TaskId i2 = TaskId.valueOf(1);
             assertEquals(i1, i2);
         }
 
         @Test
-        void differentId() {
+        public void differentId() {
             TaskId i1 = TaskId.valueOf(1);
             TaskId i2 = TaskId.valueOf(2);
             assertNotEquals(i1, i2);
         }
 
         @Test
-        void nullValue() {
+        public void nullValue() {
             assertNotEquals(TaskId.valueOf(1), null);
         }
 
         @Test
-        void differentClass() {
+        public void differentClass() {
             assertNotEquals(TaskId.valueOf(1), "ok");
         }
     }
