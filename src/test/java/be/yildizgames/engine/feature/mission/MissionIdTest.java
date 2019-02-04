@@ -32,16 +32,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * @author Grégory Van den Borre
  */
-class MissionIdTest {
+public class MissionIdTest {
 
     @Test
-    void testConstructor() {
+    public void testConstructor() {
         MissionId id = MissionId.valueOf(12);
         assertEquals(12, id.value);
     }
 
     @Test
-    void testHashCode() {
+    public void testHashCode() {
         MissionId id = MissionId.valueOf(9);
         assertEquals(9, id.hashCode());
     }
