@@ -46,13 +46,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * @author Grégory Van den Borre
  */
-class MissionManagerTest {
+public class MissionManagerTest {
 
     @Nested
-    class TaskCompleted {
+    public class TaskCompleted {
 
         @Test
-        void noExistingStatus() {
+        public void noExistingStatus() {
             MissionManager<BaseMission> m = givenAMissionManager();
             m.prepareMission(MissionId.valueOf(1), PlayerId.valueOf(1));
             m.startMission(MissionId.valueOf(1), PlayerId.valueOf(1));
@@ -63,7 +63,7 @@ class MissionManagerTest {
         }
 
         @Test
-        void replaceExistingStatus() {
+        public void replaceExistingStatus() {
             MissionManager<BaseMission> m = givenAMissionManager();
             m.prepareMission(MissionId.valueOf(1), PlayerId.valueOf(1));
             m.startMission(MissionId.valueOf(1), PlayerId.valueOf(1));
