@@ -57,4 +57,5 @@ public class TaskIdMapper implements ObjectMapper<TaskId> {
         assert taskId != null;
         return String.valueOf(taskId.value);
     }
+
 }

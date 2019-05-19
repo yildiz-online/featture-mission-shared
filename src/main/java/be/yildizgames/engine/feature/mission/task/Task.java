@@ -35,4 +35,5 @@ public interface Task {
     boolean isCompleted();
 
     boolean isFailed();
+
 }

@@ -32,4 +32,5 @@ public interface RewardFactory {
     void createReward(RewardId id);
 
     Reward getReward(RewardId id);
+
 }

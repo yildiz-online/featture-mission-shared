@@ -63,4 +63,5 @@ public class TaskStatusList implements ListWrapper <TaskStatus>{
     public int hashCode() {
         return list.hashCode();
     }
+
 }

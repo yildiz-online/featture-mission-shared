@@ -38,4 +38,5 @@ public interface MissionStatusListener <T extends Mission> {
     void missionSuccess(T mission, PlayerId playerId);
 
     void missionFailed(T mission, PlayerId playerId);
+
 }

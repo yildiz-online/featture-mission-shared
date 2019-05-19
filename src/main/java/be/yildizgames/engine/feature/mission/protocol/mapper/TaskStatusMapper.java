@@ -67,4 +67,5 @@ class TaskStatusMapper implements ObjectMapper<TaskStatus> {
                 + Separator.VAR_SEPARATOR
                 + taskStatus.status;
     }
+
 }

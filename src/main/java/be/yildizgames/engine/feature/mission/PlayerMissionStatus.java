@@ -42,4 +42,5 @@ public class PlayerMissionStatus {
         this.player = player;
         this.status = status;
     }
+
 }

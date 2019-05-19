@@ -41,4 +41,5 @@ public class RewardManager {
         Reward r = factory.getReward(rewardId);
         r.assignToPlayer(playerId);
     }
+
 }

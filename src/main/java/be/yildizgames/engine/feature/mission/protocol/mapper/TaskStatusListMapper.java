@@ -57,4 +57,5 @@ public final class TaskStatusListMapper implements ObjectMapper<TaskStatusList> 
         assert listWrapper != null;
         return this.mapper.to(listWrapper.getList());
     }
+
 }

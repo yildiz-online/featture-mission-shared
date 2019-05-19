@@ -71,6 +71,5 @@ public class TaskTypeTest {
         public void differentClass() {
             assertNotEquals(new TaskType("ok"), "ok");
         }
-
     }
 }

@@ -26,6 +26,7 @@ package be.yildizgames.engine.feature.mission;
 
 /**
  * Unique identifier for a mission.
+ *
  * @author Grégory Van den Borre
  */
 public class MissionId {

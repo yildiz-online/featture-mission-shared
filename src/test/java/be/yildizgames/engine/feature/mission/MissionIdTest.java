@@ -45,4 +45,5 @@ public class MissionIdTest {
         MissionId id = MissionId.valueOf(9);
         assertEquals(9, id.hashCode());
     }
+
 }

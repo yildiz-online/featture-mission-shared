@@ -42,6 +42,7 @@ import java.util.Set;
  * Once all the mandatory task are completed the mission status is set to completed.
  * The player can also fail the mission, in this case he may or not be able to restart it.
  * Immutable object.
+ *
  * @author Grégory Van den Borre
  *
  */

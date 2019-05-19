@@ -57,4 +57,5 @@ public class MissionIdMapper implements ObjectMapper<MissionId> {
         assert id != null;
         return String.valueOf(id.value);
     }
+
 }

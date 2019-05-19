@@ -36,4 +36,5 @@ public class TaskTypeConstant {
     private TaskTypeConstant() {
         super();
     }
+
 }

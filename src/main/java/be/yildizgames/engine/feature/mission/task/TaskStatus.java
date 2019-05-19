@@ -64,4 +64,5 @@ public class TaskStatus {
         result = 31 * result + missionId.hashCode();
         return result;
     }
+
 }

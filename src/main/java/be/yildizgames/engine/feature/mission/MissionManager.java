@@ -44,6 +44,7 @@ import java.util.stream.Collectors;
 
 /**
  * The mission manager will handle the mission creation and assignment to ad hoc players.
+ *
  * @author Grégory Van den Borre
  */
 public class MissionManager <T extends Mission> implements TaskStatusListener, PlayerCreationListener {

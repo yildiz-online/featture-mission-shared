@@ -33,4 +33,5 @@ import be.yildizgames.common.model.PlayerId;
 public interface MissionPrerequisite {
 
     boolean check(PlayerId p);
+
 }

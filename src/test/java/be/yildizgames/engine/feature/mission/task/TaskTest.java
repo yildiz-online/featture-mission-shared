@@ -68,5 +68,4 @@ public class TaskTest {
             assertTrue(t.isCompleted());
         }
     }
-
 }

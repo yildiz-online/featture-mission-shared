@@ -57,4 +57,5 @@ public class MissionStatusMapper implements ObjectMapper<MissionStatus> {
         assert status != null;
         return String.valueOf(status.value);
     }
+
 }

@@ -48,4 +48,5 @@ public interface TaskStatusListener {
      */
     //@Ensures taskId != null
     void taskFailed(TaskId taskId, MissionId missionId, PlayerId playerId);
+
 }

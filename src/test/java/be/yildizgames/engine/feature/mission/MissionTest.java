@@ -98,4 +98,5 @@ public class MissionTest {
             assertFalse(m.canStartFor(PlayerId.WORLD));
         }
     }
+
 }

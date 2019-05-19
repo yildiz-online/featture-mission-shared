@@ -83,4 +83,5 @@ public class TaskRegisterer implements TaskStatusListener {
                 .ofNullable(this.actionListenerRegistered.get(new Pair<>(taskId, playerId)))
                 .ifPresent(this.action::removeListener);*/
     }
+
 }

@@ -48,4 +48,5 @@ public interface Mission {
     MissionId getId();
 
     RewardId getReward();
+
 }

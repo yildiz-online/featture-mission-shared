@@ -87,4 +87,5 @@ public class BaseTask implements Task {
     public boolean isFailed() {
         return "FAILED".equals(this.status);
     }
+
 }

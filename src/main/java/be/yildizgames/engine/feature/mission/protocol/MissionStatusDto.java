@@ -68,4 +68,5 @@ public class MissionStatusDto {
         result = 31 * result + tasks.hashCode();
         return result;
     }
+
 }

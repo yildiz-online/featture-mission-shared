@@ -39,4 +39,5 @@ public class RewardId extends ValueObject {
     public static RewardId valueOf(int value) {
         return new RewardId(value);
     }
+
 }

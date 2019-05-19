@@ -80,7 +80,7 @@ public enum MissionStatus {
                 .orElseThrow(AssertionError::new);
     }
 
-    public int getValue() {
+    public final int getValue() {
         return value;
     }
 }

@@ -35,4 +35,5 @@ import be.yildizgames.common.model.PlayerId;
 public interface Reward {
 
     void assignToPlayer(PlayerId player);
+
 }
