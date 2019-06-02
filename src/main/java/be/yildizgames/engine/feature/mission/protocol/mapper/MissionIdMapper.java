@@ -27,6 +27,8 @@ package be.yildizgames.engine.feature.mission.protocol.mapper;
 import be.yildizgames.common.mapping.ObjectMapper;
 import be.yildizgames.engine.feature.mission.MissionId;
 
+import java.util.Objects;
+
 /**
  * @author Grégory Van den Borre
  */
@@ -43,18 +45,17 @@ public class MissionIdMapper implements ObjectMapper<MissionId> {
     }
 
     @Override
-    public MissionId from(String s) throws MappingException {
-        assert s != null;
+    public MissionId from(String s) {
+        Objects.requireNonNull(s);
         try {
             return MissionId.valueOf(Integer.parseInt(s));
         } catch (final NumberFormatException nfe) {
-            throw new MappingException(nfe);
+            throw new IllegalArgumentException(nfe);
         }
     }
 
     @Override
     public String to(MissionId id) {
-        assert id != null;
         return String.valueOf(id.value);
     }
 

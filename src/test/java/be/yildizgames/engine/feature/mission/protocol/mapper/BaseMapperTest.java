@@ -44,31 +44,31 @@ public abstract class BaseMapperTest<T>{
     }
 
     @Test
-    public void happyFlow() throws MappingException {
+    public void happyFlow() {
         String to = mapper.to(baseObject);
         T from = mapper.from(to);
         Assertions.assertEquals(baseObject, from);
     }
 
     @Test
-    public void tooShort() throws MappingException {
+    public void tooShort() {
         String to = mapper.to(baseObject);
         if (to.contains(Separator.OBJECTS_SEPARATOR)) {
-            Assertions.assertThrows(MappingException.class, () -> mapper.from(to.substring(0, to.indexOf(Separator.OBJECTS_SEPARATOR))));
+            Assertions.assertThrows(IllegalArgumentException.class, () -> mapper.from(to.substring(0, to.indexOf(Separator.OBJECTS_SEPARATOR))));
         } else if (to.contains(Separator.VAR_SEPARATOR)) {
-            Assertions.assertThrows(MappingException.class, () -> mapper.from(to.substring(0, to.indexOf(Separator.VAR_SEPARATOR))));
+            Assertions.assertThrows(IllegalArgumentException.class, () -> mapper.from(to.substring(0, to.indexOf(Separator.VAR_SEPARATOR))));
         } else {
-            Assertions.assertThrows(MappingException.class, () -> mapper.from(""));
+            Assertions.assertThrows(IllegalArgumentException.class, () -> mapper.from(""));
         }
     }
 
     @Test
-    public void fromNull() throws MappingException {
-        Assertions.assertThrows(AssertionError.class, () -> mapper.from(null));
+    public void fromNull() {
+        Assertions.assertThrows(NullPointerException.class, () -> mapper.from(null));
     }
 
     @Test
     public void toNull() {
-        Assertions.assertThrows(AssertionError.class, () -> mapper.to(null));
+        Assertions.assertThrows(NullPointerException.class, () -> mapper.to(null));
     }
 }

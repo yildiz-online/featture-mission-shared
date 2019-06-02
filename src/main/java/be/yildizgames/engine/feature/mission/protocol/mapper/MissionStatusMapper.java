@@ -27,6 +27,8 @@ package be.yildizgames.engine.feature.mission.protocol.mapper;
 import be.yildizgames.common.mapping.ObjectMapper;
 import be.yildizgames.engine.feature.mission.MissionStatus;
 
+import java.util.Objects;
+
 /**
  * @author Grégory Van den Borre
  */
@@ -44,17 +46,16 @@ public class MissionStatusMapper implements ObjectMapper<MissionStatus> {
 
     @Override
     public MissionStatus from(String s) {
-        assert s != null;
+        Objects.requireNonNull(s);
         try {
             return MissionStatus.valueOf(Integer.parseInt(s));
         } catch (final NumberFormatException nfe) {
-            throw new MappingException("Error retrieving id", nfe);
+            throw new IllegalArgumentException(nfe);
         }
     }
 
     @Override
     public String to(MissionStatus status) {
-        assert status != null;
         return String.valueOf(status.value);
     }
 

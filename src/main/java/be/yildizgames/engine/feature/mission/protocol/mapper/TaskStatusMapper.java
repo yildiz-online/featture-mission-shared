@@ -44,8 +44,7 @@ class TaskStatusMapper implements ObjectMapper<TaskStatus> {
     }
 
     @Override
-    public TaskStatus from(String s) throws MappingException {
-        assert s != null;
+    public TaskStatus from(String s) {
         String[] values = s.split(Separator.VAR_SEPARATOR);
         String status = values.length == 3 ? values[2] : "";
         try {
@@ -54,13 +53,12 @@ class TaskStatusMapper implements ObjectMapper<TaskStatus> {
                 MissionIdMapper.getInstance().from(values[1]),
                 status);
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            throw new MappingException(e.getMessage());
+            throw new IllegalArgumentException(e);
         }
     }
 
     @Override
     public String to(TaskStatus taskStatus) {
-        assert taskStatus != null;
         return TaskIdMapper.getInstance().to(taskStatus.id)
                 + Separator.VAR_SEPARATOR
                 + MissionIdMapper.getInstance().to(taskStatus.missionId)

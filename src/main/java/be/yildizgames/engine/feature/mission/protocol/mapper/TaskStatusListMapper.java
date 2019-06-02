@@ -29,6 +29,8 @@ import be.yildizgames.common.mapping.ObjectMapper;
 import be.yildizgames.engine.feature.mission.task.TaskStatus;
 import be.yildizgames.engine.feature.mission.task.TaskStatusList;
 
+import java.util.Objects;
+
 /**
  * @author Grégory Van den Borre
  */
@@ -47,14 +49,13 @@ public final class TaskStatusListMapper implements ObjectMapper<TaskStatusList> 
     }
 
     @Override
-    public TaskStatusList from(String s) throws MappingException {
-        assert s != null;
+    public TaskStatusList from(String s) {
+        Objects.requireNonNull(s);
         return new TaskStatusList(this.mapper.from(s));
     }
 
     @Override
     public String to(TaskStatusList listWrapper) {
-        assert listWrapper != null;
         return this.mapper.to(listWrapper.getList());
     }
 

@@ -49,8 +49,7 @@ public class MissionStatusDtoMapper implements ObjectMapper<MissionStatusDto> {
     private final CollectionMapper<TaskStatus> taskMapper = new CollectionMapper<>(TaskStatusMapper.getInstance());
 
     @Override
-    public MissionStatusDto from(String s) throws MappingException {
-        assert s != null;
+    public MissionStatusDto from(String s) {
         String[] v = s.split(Separator.OBJECTS_SEPARATOR);
         try {
             return new MissionStatusDto(
@@ -59,13 +58,12 @@ public class MissionStatusDtoMapper implements ObjectMapper<MissionStatusDto> {
                     taskMapper.from(v[2])
             );
         } catch (IndexOutOfBoundsException e) {
-            throw new MappingException(e);
+            throw new IllegalArgumentException(e);
         }
     }
 
     @Override
     public String to(MissionStatusDto dto) {
-        assert dto != null;
         return MissionIdMapper.getInstance().to(dto.missionId)
                 + Separator.OBJECTS_SEPARATOR
                 + MissionStatusMapper.getInstance().to(dto.status)
