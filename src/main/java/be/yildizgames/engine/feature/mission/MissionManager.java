@@ -31,8 +31,6 @@ import be.yildizgames.engine.feature.mission.task.TaskFactory;
 import be.yildizgames.engine.feature.mission.task.TaskId;
 import be.yildizgames.engine.feature.mission.task.TaskStatus;
 import be.yildizgames.engine.feature.mission.task.TaskStatusListener;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -49,7 +47,7 @@ import java.util.stream.Collectors;
  */
 public class MissionManager <T extends Mission> implements TaskStatusListener, PlayerCreationListener {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(MissionManager.class);
+    private static final System.Logger LOGGER = System.getLogger(MissionManager.class.getName());
 
     /**
      * The list of all possible missions.
@@ -137,7 +135,7 @@ public class MissionManager <T extends Mission> implements TaskStatusListener, P
             this.activeMissions.get(playerId).remove(mission.getId());
             this.listeners.forEach(l -> l.missionFailed(mission, playerId));
         } else {
-            LOGGER.warn("{} does not exists for mission {} task failed for player: {}",taskId, missionId, playerId);
+            LOGGER.log(System.Logger.Level.WARNING,"{} does not exists for mission {} task failed for player: {}",taskId, missionId, playerId);
         }
     }
 
