@@ -24,7 +24,6 @@
 
 module be.yildizgames.feature.mission.shared {
     requires be.yildizgames.common.model;
-    requires be.yildizgames.common.util;
     requires be.yildizgames.common.mapping;
 
     exports be.yildizgames.engine.feature.mission;
