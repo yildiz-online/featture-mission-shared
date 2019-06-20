@@ -28,8 +28,6 @@ import be.yildizgames.common.model.PlayerId;
 import be.yildizgames.engine.feature.mission.reward.RewardId;
 import be.yildizgames.engine.feature.mission.task.TaskId;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -71,7 +69,7 @@ public class BaseMission implements Mission {
         if(tasks.isEmpty()) {
             throw new IllegalArgumentException("Task list cannot be empty.");
         }
-        this.tasks = Collections.unmodifiableSet(new HashSet<>(tasks));
+        this.tasks = Set.copyOf(tasks);
         this.prerequisite = p;
         this.reward = reward;
     }
